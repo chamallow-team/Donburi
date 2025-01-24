@@ -1,10 +1,12 @@
 import {Client} from "eris";
+import {logger} from "./logger.ts";
 
 /**
  * Create the client with the Client configuration
  * @return {Client} The created client
  */
 function create_client(): Client {
+    logger.log('info', 'Starting')
     if (!process.env.TOKEN) throw new Error('TOKEN env is required');
 
     return new Client(
@@ -36,4 +38,4 @@ function create_client(): Client {
     );
 }
 
-export default create_client
+export default create_client()
