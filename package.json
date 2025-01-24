@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "eris": "^0.18.0",
+    "winston": "^3.17.0"
+  },
+  "name": "donburi",
+  "module": "src/app.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "app": "bun run src/app.ts"
+  }
+}
