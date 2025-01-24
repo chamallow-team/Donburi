@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "eris": "^0.18.0",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "name": "donburi",
   "module": "src/app.ts",
