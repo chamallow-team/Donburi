@@ -14,7 +14,7 @@ const defaultLogTransport = new winston.transports.DailyRotateFile({
     maxSize: '20m',
 
     utc: true,
-    level: 'info',
+    level: 'debug',
     auditFile: 'logs/audit.json'
 });
 
