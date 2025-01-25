@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//
+//
+//    INCIDENTS
+//
+//
+
+model Incident {
+  incident_id        String  @id @db.Char(36)
+  discord_message_id String? @db.VarChar(36)
+
+  updates IncidentUpdate[]
+}
+
+model IncidentUpdate {
+  update_id String @id @db.Char(36)
+
+  message String @db.Text
+
+  status_id Int
+  status    IncidentStatus @relation(fields: [status_id], references: [status_id], onDelete: Cascade)
+
+  incident_id String   @db.Char(36)
+  incident    Incident @relation(fields: [incident_id], references: [incident_id], onDelete: Cascade)
+}
+
+model IncidentStatus {
+  status_id      Int              @id @default(autoincrement())
+  status_label   String           @unique
+  IncidentUpdate IncidentUpdate[]
+}

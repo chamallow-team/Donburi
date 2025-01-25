@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "@prisma/client": "^6.2.1",
+    "bun-sqlite-migrations": "^1.0.2",
     "eris": "^0.18.0",
+    "prisma": "^6.2.1",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
   },
@@ -14,6 +17,7 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "app": "bun run src/app.ts"
+    "app": "bun run db && bun run src/app.ts",
+    "db": "bun prisma generate --no-hints && bun prisma db push"
   }
 }
