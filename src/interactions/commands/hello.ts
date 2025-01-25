@@ -15,7 +15,7 @@ export default {
             interaction.id,
             interaction.token,
             {
-                type: ResponseType.APPLICATION_COMMAND,
+                type: ResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data: {
                     content: "Hello World!",
                 }

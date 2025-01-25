@@ -63,9 +63,13 @@ export async function push_command(command: Command, old_commands: ApplicationCo
 }
 
 export const ResponseType = {
-    PING: 1 as InteractionResponseTypes,
-    APPLICATION_COMMAND: 2 as InteractionResponseTypes,
-    MESSAGE_COMPONENT: 3 as InteractionResponseTypes,
-    APPLICATION_COMMAND_AUTOCOMPLETE: 4 as InteractionResponseTypes,
-    MODAL_SUBMIT: 5 as InteractionResponseTypes,
+    PONG: 1 as InteractionResponseTypes,
+    CHANNEL_MESSAGE_WITH_SOURCE: 4 as InteractionResponseTypes,
+    DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE: 5 as InteractionResponseTypes,
+    DEFERRED_UPDATE_MESSAGE: 6 as InteractionResponseTypes,
+    UPDATE_MESSAGE: 7 as InteractionResponseTypes,
+    APPLICATION_COMMAND_AUTOCOMPLETE_RESULT: 8 as InteractionResponseTypes,
+    MODAL: 9 as InteractionResponseTypes,
+    PREMIUM_REQUIRED: 10 as InteractionResponseTypes,
+    LAUNCH_ACTIVITY: 12 as InteractionResponseTypes,
 }
