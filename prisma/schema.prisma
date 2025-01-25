@@ -29,9 +29,11 @@ model Incident {
 model IncidentUpdate {
   update_id String @id @db.Char(36)
 
-  message String @db.Text
+  message   String  @db.Text
+  // Si ca a été détecté par le bot
+  automatic Boolean
 
-  status_id Int
+  status_id String         @db.Char(36)
   status    IncidentStatus @relation(fields: [status_id], references: [status_id], onDelete: Cascade)
 
   incident_id String   @db.Char(36)
@@ -39,7 +41,8 @@ model IncidentUpdate {
 }
 
 model IncidentStatus {
-  status_id      Int              @id @default(autoincrement())
-  status_label   String           @unique
-  IncidentUpdate IncidentUpdate[]
+  status_id    String @id @db.Char(36)
+  status_label String @unique
+
+  updates IncidentUpdate[]
 }
