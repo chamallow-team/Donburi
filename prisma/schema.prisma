@@ -23,6 +23,8 @@ model Incident {
   incident_id        String  @id @db.Char(36)
   discord_message_id String? @db.VarChar(36)
 
+  resolved Boolean @default(false)
+
   updates IncidentUpdate[]
 }
 

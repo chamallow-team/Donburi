@@ -15,12 +15,12 @@ function register_event<K extends keyof Eris.ClientEvents>(event: ClientEvent<K>
 import ready from "./events/ready.ts";
 import disconnect from "./events/disconnect.ts";
 import interactionCreate from "./events/interactionCreate.ts";
-import guildMemberUpdate from "./events/guildMemberUpdate.ts";
+import presenceUpdate from "./events/presenceUpdate.ts";
 
 register_event(ready)
 register_event(disconnect)
 register_event(interactionCreate)
-register_event(guildMemberUpdate)
+register_event(presenceUpdate)
 
 logger.info("Querying and loading interactions...")
 await queryCommands();
