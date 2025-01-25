@@ -4,6 +4,9 @@ import Eris from "eris";
 import client from "./client.ts";
 import create_process_handles from "./process.ts";
 import {queryCommands} from './controllers/importers/commands.ts'
+import {init_database} from "./database.ts";
+
+await init_database()
 
 function register_event<K extends keyof Eris.ClientEvents>(event: ClientEvent<K>) {
     client.on(event.name, event.listener);

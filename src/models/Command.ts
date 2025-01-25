@@ -34,11 +34,10 @@ export async function push_command(command: Command, old_commands: ApplicationCo
         // Update
         // Check if the command NEEDS to be updated
         let need_update = command.config.description !== old.description
-            || command.config.dmPermission !== old.dmPermission
-            || command.config.defaultMemberPermissions !== old.defaultMemberPermissions
-            || command.config.options !== old.options
-            || command.config.type !== old.type;
-
+            || (command.config.dmPermission && command.config.dmPermission !== old.dmPermission)
+            || (command.config.defaultMemberPermissions && command.config.defaultMemberPermissions !== old.defaultMemberPermissions)
+            || (command.config.type && command.config.type !== old.type);
+        
         if (need_update) {
             await client.editCommand(
                 old.id,
