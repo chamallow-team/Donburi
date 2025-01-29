@@ -23,7 +23,8 @@ model Incident {
   incident_id        String  @id @db.Char(36)
   discord_message_id String? @db.VarChar(36)
 
-  resolved Boolean @default(false)
+  resolved  Boolean  @default(false)
+  updatedAt DateTime @default(now())
 
   updates IncidentUpdate[]
 }
@@ -31,9 +32,10 @@ model Incident {
 model IncidentUpdate {
   update_id String @id @db.Char(36)
 
-  message   String  @db.Text
+  message     String   @db.Text
+  update_date DateTime @default(now())
   // Si ca a été détecté par le bot
-  automatic Boolean
+  automatic   Boolean
 
   status_id String         @db.Char(36)
   status    IncidentStatus @relation(fields: [status_id], references: [status_id], onDelete: Cascade)
@@ -47,4 +49,14 @@ model IncidentStatus {
   status_label String @unique
 
   updates IncidentUpdate[]
+}
+
+//
+//
+//  
+//
+//
+
+model ModerationChannel {
+  channel_id String @id @db.VarChar(36)
 }
