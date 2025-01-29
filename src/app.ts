@@ -28,5 +28,9 @@ logger.info("Interactions ready")
 
 create_process_handles()
 
-client.connect()
-    .then(() => logger.info('Client created'));
+try {
+    client.connect()
+        .then(() => logger.info('Client created'));
+} catch (error) {
+    logger.error(error);
+}
