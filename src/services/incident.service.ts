@@ -23,7 +23,7 @@ export function getUnresolvedIncident() {
 }
 
 export function getIncident(incident_id: string) {
-    prisma.incident.findUnique({
+    return prisma.incident.findUnique({
         where: {
             incident_id
         },
@@ -35,6 +35,26 @@ export function getIncident(incident_id: string) {
             },
         }
     })
+}
+
+export function getIncidentList(skip: number | undefined = undefined, take: number | undefined = undefined) {
+    return prisma.incident.findMany({
+        include: {
+            updates: {
+                include: {
+                    status: true
+                }
+            },
+        },
+        orderBy: {
+            updatedAt: "desc"
+        },
+        skip, take,
+    })
+}
+
+export function getIncidentsCount() {
+    return prisma.incident.count({})
 }
 
 export async function createIncident(
@@ -85,13 +105,14 @@ export function defineUpdateMessage(incident_id: string, message_id: string | nu
     })
 }
 
-type Incident = ({
+export type Incident = ({
     updates: ({ status: { status_id: string, status_label: string } } & {
         incident_id: string,
         update_id: string,
         message: string,
         automatic: boolean,
-        status_id: string
+        status_id: string,
+        update_date: Date
     })[]
 } & { incident_id: string, discord_message_id: string | null, resolved: boolean });
 
@@ -180,9 +201,5 @@ export async function sendUpdateToDiscord(incident_id: string) {
 
 async function create_incident_message(channel: AnyGuildTextableChannel, embeds: EmbedOptions[], incident_id: string) {
     let message = await client.createMessage(channel.id, {embeds});
-
-    await prisma.incident.update({
-        data: {discord_message_id: message.id},
-        where: {incident_id}
-    })
+    await defineUpdateMessage(incident_id, message.id)
 }
